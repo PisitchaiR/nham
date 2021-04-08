@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <title>Calculate Cost</title>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -44,14 +43,20 @@
         <a href="/index.html">Main Page</a>
     </center>
     <script>
-        window.addEventListener("keyup", function (event) {
+        document.querySelector("#btnSubmit").addEventListener("click", addData);
+        window.addEventListener("keyup", () => {
+            if (event.keyCode === 13) {
+                addData()
+            }
+        })
+
+        function addData() {
             let price = document.querySelector("#price").value;
             let name = document.querySelector("#name").value;
             if (event.keyCode === 13) {
                 if (price === "") {
                     alert("please input price");
-                }
-                else if (name === "") {
+                } else if (name === "") {
                     alert("please input name");
                 } else {
                     db.collection("store").doc(`${name}`)
@@ -59,14 +64,14 @@
                             name: name,
                             price: (price / 20).toFixed(2)
                         })
-                    
+
                 }
                 document.querySelector("#price").value = "";
                 document.querySelector("#name").value = "";
                 // Trigger the button element with a click
                 document.getElementById("myInput").click();
             }
-        });
+        }
     </script>
 </body>
 
