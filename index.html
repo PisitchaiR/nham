@@ -57,7 +57,8 @@
             <table class="table table-borderless text-center" id="showTable">
                 <tr>
                     <th scope="col">name</th>
-                    <th scope="col">number</th>
+                    <th scope="col">number of drop</th>
+                    <th scope="col">price</th>
                 </tr>
             </table>
             <input type="submit" id="btnChoose" value="submit">
@@ -71,11 +72,15 @@
     </script>
     <script>
         btnChoose.addEventListener("click", () => {
-            added = document.querySelectorAll("added");
-            console.log(added.length);
-            for (let i = 0; i < added.length; i++) {
-                console.log("hello");
+            let allPrice = document.querySelectorAll("#priceData");
+            let resultPrice = 0;
+            console.log(allPrice.length)
+            for(let i=0; i<allPrice.length; i++){
+                let choosePrice = allPrice[i].dataset.price;
+                resultPrice += parseFloat(choosePrice);
             }
+            resultPerBottom = resultPrice/3+
+            console.log(resultPerBottom);
         })
         window.addEventListener("keyup", () => {
             if (event.keyCode === 13) {
@@ -83,17 +88,21 @@
             }
         })
         let i = 0;
-
         function show() {
+            let option = document.querySelectorAll("#optionData");
             let row = showTable.insertRow(-1);
-            row.insertCell(i).innerHTML = dataInput.value;
-            row.insertCell(i + 1).innerHTML = number.value;
-            i + 1;
+            let choose = option[dataInput.value];
+            let name = choose.dataset.name;
+            let numberChoose = number.value;
+            let price = (choose.dataset.price * numberChoose).toFixed(2);
+            row.innerHTML = `<td id=nameData value="${dataInput.value}" data-name="${name}" >${name}</td><td id=numberData value="${dataInput.value}" data-number="${numberChoose}">${numberChoose}</td><td id=priceData value="${dataInput.value}" data-price="${price}" >${price}</td>`
         }
         db.collection('store').onSnapshot(snapshot => {
-            let data = "<option value='blank' disabled selected></option>"
+            let j = 0;
+            let data = "<option value='blank' disabled selected></option>";
             snapshot.forEach((doc) => {
-                data += '<option id="added" value="' + doc.data().name + '">' + doc.data().name + '</option>';
+                data += `<option id="optionData" value="${j}" data-name="${doc.data().name}" data-price="${doc.data().price}">${doc.data().name}</option>`;
+                j += 1;
                 //     console.log(doc.name, doc.price)
             })
             dataInput.innerHTML = data;
