@@ -67,7 +67,7 @@
                     price = (price / 20).toFixed(2);
                 }
                 else if(selectType.value === "oil" || selectType.value === "di"){
-                    price = price;
+                    price = price*3;
                 }
                 db.collection("store").doc(`${name}`)
                     .set({

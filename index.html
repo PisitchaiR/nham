@@ -62,6 +62,7 @@
                 </tr>
             </table>
             <input type="submit" id="btnChoose" value="submit">
+            <div class="costResult"></div>
         </div>
     </center>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -74,13 +75,15 @@
         btnChoose.addEventListener("click", () => {
             let allPrice = document.querySelectorAll("#priceData");
             let resultPrice = 0;
+            let bottle = 55/12
             console.log(allPrice.length)
             for(let i=0; i<allPrice.length; i++){
                 let choosePrice = allPrice[i].dataset.price;
                 resultPrice += parseFloat(choosePrice);
             }
-            resultPerBottom = resultPrice/3+
-            console.log(resultPerBottom);
+            resultPerBottle = resultPrice/3+bottle
+            console.log(resultPerBottle);
+            document.querySelector(".costResult").innerHTML = "ราคาต้นทุนต่อขวด = " + resultPerBottle;
         })
         window.addEventListener("keyup", () => {
             if (event.keyCode === 13) {
@@ -103,7 +106,6 @@
             snapshot.forEach((doc) => {
                 data += `<option id="optionData" value="${j}" data-name="${doc.data().name}" data-price="${doc.data().price}">${doc.data().name}</option>`;
                 j += 1;
-                //     console.log(doc.name, doc.price)
             })
             dataInput.innerHTML = data;
         })

@@ -11,3 +11,10 @@ button {
 button:hover {
     transform: scale(1.2);
 }
+
+.costResult {
+    margin-top: 2em;
+    border: 1px solid black;
+    border-radius: 1em;
+    padding: 1em;
+}
