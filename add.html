@@ -64,10 +64,10 @@
             } else if (name === "") {
                 alert("please input name");
             } else {
-                if (selectType.value === "alcolhol") {
-                    price = (price / 20).toFixed(2);
+                if (selectType.value === "oil") {
+                    price = (price / 20);
                 }
-                else if (selectType.value === "oil" || selectType.value === "di") {
+                else if (selectType.value === "alcolhol" || selectType.value === "di") {
                     price = price * 3;
                 }
                 db.collection("store").doc(`${name}`)
