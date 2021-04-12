@@ -58,26 +58,26 @@
         function addData() {
             let price = document.querySelector("#price").value;
             let name = document.querySelector("#name").value;
+            console.log(price)
             if (price === "") {
                 alert("please input price");
             } else if (name === "") {
                 alert("please input name");
             } else {
-                if(selectType.value === "alcolhol"){
+                if (selectType.value === "alcolhol") {
                     price = (price / 20).toFixed(2);
                 }
-                else if(selectType.value === "oil" || selectType.value === "di"){
-                    price = price*3;
+                else if (selectType.value === "oil" || selectType.value === "di") {
+                    price = price * 3;
                 }
                 db.collection("store").doc(`${name}`)
                     .set({
                         name: name,
                         price: price
                     })
-
+                price.value = "";
+                name.value = "";
             }
-            document.querySelector("#price").value = "";
-            document.querySelector("#name").value = "";
             // Trigger the button element with a click
             document.getElementById("myInput").click();
         }
