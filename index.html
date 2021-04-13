@@ -51,9 +51,10 @@
             <input class="col-4" type="number" id="number" placeholder="number">
             <button class="col-1" onclick="show()" id="btnSubmit"><i data-feather="plus-circle"></i></button>
             <a class="mt-4" style="display: block;" href="add.html">Add Page</a>
+            <a class="mt-4" style="display: block;" href="cruse.html">Cruse Page</a>
         </div>
 
-        <div id="choose" class="container mt-5">
+        <div id="choose" class="container mt-3">
             <h2 align="center">table</h2>
             <table class="table table-borderless text-center" id="showTable">
                 <tr>
@@ -95,21 +96,13 @@
             resultPerBottle = resultPrice / 3 + bottle
             console.log(resultPerBottle);
             document.querySelector(".costResult").innerHTML = "ราคาต้นทุนต่อขวด = " + resultPerBottle;
-            let queryName = allNameData[0].dataset.name;
-            let queryPrice = allNameData[0].dataset.price;
-            let queryNumber = allNameData[0].dataset.number;
-            db.collection("cruse").doc(`${nameCruse}`)
-                .set({
-                    resultPerBottle: resultPerBottle,
-                    name: queryName,
-                    price: queryPrice,
-                    number: queryNumber
-                })
-            for (let j = 1; j < allNameData.length; j++) {
+            console.log(allNameData.length)
+            for (let j = 0; j < allNameData.length; j++) {
+                let nameCruse = document.querySelector("#nameCruse").value;
                 let queryName = allNameData[j].dataset.name;
-                let queryPrice = allNameData[j].dataset.price;
-                let queryNumber = allNameData[j].dataset.number;
-                db.collection("cruse").doc(`${nameCruse}`).add({
+                let queryPrice = allPrice[j].dataset.price;
+                let queryNumber = allNumberData[j].dataset.number;
+                db.collection("cruse").doc(`${nameCruse}`).collection(`${nameCruse}`).doc(`${queryName}`).set({
                     name: queryName,
                     price: queryPrice,
                     number: queryNumber
