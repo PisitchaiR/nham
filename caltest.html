@@ -87,7 +87,7 @@
             }
             resultPerBottle = resultPrice / 3 + bottle
             console.log(resultPerBottle);
-            document.querySelector(".costResult").innerHTML = "ราคาต้นทุนต่อขวด = " + resultPerBottle;
+            document.querySelector(".costResult").innerHTML ="ราคาoil " + resultPrice/3 + " ราคาขวด "+ bottle.toFixed(2) + " ราคาต้นทุนต่อขวด = " + resultPerBottle.toFixed(2);
             console.log(allNameData.length)
             for (let j = 0; j < allNameData.length; j++) {
                 let nameCruse = document.querySelector("#nameCruse").value;
